@@ -5,57 +5,85 @@ import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import Card from "../components/Card";
+import { courseCards } from "../data";
+import Tablerow from "../components/Tablerow";
+import Tablemodal from "../modal/Tablemodal";
 
 class Container1 extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      courseCards: [
-        {
-          id: 1,
-          title: "first title",
-          des: "this is the card and this card given all detaiils with this image and description.For more details contact your contact person",
-          price: "12.22",
-        },
-        {
-          id: 2,
-          title: "second title",
-          des: "this is the card and this card given all detaiils with this image and description.For more details contact your contact person",
-          price: "12.22",
-        },
-        {
-          id: 3,
-          title: "third title",
-          des: "this is the card and this card given all detaiils with this image and description.For more details contact your contact person",
-          price: "12.22",
-        },
-        {
-          id: 4,
-          title: "fourth title",
-          des: "this is the card and this card given all detaiils with this image and description.For more details contact your contact person",
-          price: "12.22",
-        },
-      ],
+      modalData: false,
+      courses: [],
     };
   }
+
+  openModal = (courseId) => {
+    const selectedCourse = courseCards.find(
+      (course) => course.id === parseInt(courseId)
+    );
+    this.setState({ modalData: true , courses:selectedCourse });
+    // console.log(this.courses);
+  };
+
+  closeModal = () => {
+    this.setState({ modalData: false });
+  };
 
   render() {
     return (
       <div className="block p-2">
-        <section className="py-2 px-2 w-full h-auto">
-          <div className="bg-white flex justify-center gap-4">
-            {this.state.courseCards.map((item) => {
+        <section className="py-4 px-2 w-full h-auto">
+          {/* <div className="container"> */}
+          <div className="bg-white flex justify-center gap-4 ">
+            {courseCards.map((item) => {
               return (
                 <Link to={`post/${item.id}`}>
-                <Card item={item } key={item.id} />
+                  <Card key={item.id} item={item} />
                 </Link>
               );
-              //   return  <Card item={item} />
             })}
           </div>
+          {/* </div> */}
+        </section>
+
+        <section className="py-4 px-2 w-full h-auto flex justify-center ">
+          <table className="border-separate border border-slate-400">
+            <caption className="caption-top font-semibold text-lg text-center py-2">
+              Course details table
+            </caption>
+            <thead>
+              <tr>
+                <th className="border border-slate-300 px-4 py-2">Id</th>
+                <th className="border border-slate-300 px-4 py-2">Name</th>
+                <th className="border border-slate-300 px-4 py-2">
+                  Description
+                </th>
+                <th className="border border-slate-300 px-4 py-2">price</th>
+                <th className="border border-slate-300 px-4 py-2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {courseCards.map((course) => {
+                return (
+                  <Tablerow
+                    key={course.id}
+                    course={course}
+                    openModal={this.openModal}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
         </section>
         <section className="py-2 px-2 w-full h-auto"></section>
-        <section className="py-2 px-2 w-full h-auto"></section>
+
+        {/* {this.courses} */}
+
+        {this.state.modalData && (
+          <Tablemodal courses={this.state.courses} closeModal={this.closeModal} />
+        )}
       </div>
       // <div>
       //     <button className="bg-red-500 text-lg font-normal mx-2 shadow-xl rounded-lg px-2" onClick={()=> console.log(this.props.stateprop1)}>
