@@ -9,7 +9,7 @@ class Tablerow extends Component{
                 <td className="border border-slate-300 px-4 py-2">{this.props.course.title}</td>
                 <td className="border border-slate-300 px-4 py-2">{this.props.course.des}</td>
                 <td className="border border-slate-300 px-4 py-2">{this.props.course.price}</td>
-                <td className="border border-slate-300 px-4 py-2 "><button className="bg-red-300 rounded-md font-normal text-sm px-3" onClick={() => this.props.openModal(this.props.course.id)}>View</button></td>
+                <td className="border border-slate-300 px-4 py-2 "><button className="bg-red-300 rounded-md font-normal text-sm px-3 shadow-xl" onClick={() => this.props.openModal(this.props.course.id)}>View</button></td>
               </tr>
         )
     }

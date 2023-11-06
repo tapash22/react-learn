@@ -13,9 +13,24 @@ class Carddetails extends Component{
         }
         return (
             <div>
-                new id : {id},
-                title : {singleCard.title},
-                description : {singleCard.des}
+                <div className="flex justify-center">
+                    <div className="w-1/6 h-auto px-4 py-4">
+                        {/* for show image use require('path of image') */}
+                        <img src={singleCard.image} alt="" />
+                    </div>
+                    <div className="block px-8 py-3 w-4/6 shadow-xl shadow-gray-400">
+                        <h6 className="text-lg font-semibold text-black px-2 py-2 uppercase">
+                            {singleCard.title}
+                        </h6>
+                        <p className="text-sm font-normal py-3 px-4 text-justify tracking-wider leading-6 ">
+                            {singleCard.des }
+                        </p>
+                        <h6 className="text-lg font-bold text-right px-2 py-1">
+                            {singleCard.price}
+                        </h6>
+                    </div>
+                </div>
+
             </div>
         )
     }

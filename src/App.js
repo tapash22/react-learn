@@ -1,4 +1,5 @@
 import './App.css';
+import Footer from './components/Footer';
 // import Container1 from './check/Container1';
 // import Counter from './counter/Counter';
 import Routes from './router';
@@ -14,6 +15,8 @@ function App() {
      {/* <Header /> */}
      <div>
       <Routes />
+
+      <Footer />
       {/* <Container1 /> */}
      </div>
     </div>
